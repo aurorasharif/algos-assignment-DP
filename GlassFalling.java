@@ -25,8 +25,25 @@ public class GlassFalling {
 
   // Do not change the parameters!
   public int glassFallingBottomUp(int floors, int sheets) {
-    // Fill in here and change the return
-    return 0;
+     // Fill in here and change the return
+    if(floors == 0 || floors == 1 || sheets == 1) return floors;
+    int[][] table = new int[sheets+1][floors+1];  
+      for(int i = 1; i <= sheets; i++) {
+          table[i][0] = 0;
+          table[i][1] = 1;
+      } for(int i = 1; i <= floors; i++) {
+          table[1][i] = i;
+      } for(int i = 2; i <= sheets; i++) {
+          for(int j = 2; j <= floors; j++){
+              table[i][j] = Integer.MAX_VALUE;
+              for(int k = 1; k <= j; k++){
+              int res = 1 + Math.max(table[i-1][k-1], table[i][j-k]); 
+                   if (res < table[i][j]) {
+                   table[i][j] = res; 
+                   }
+              }
+          }
+       } return table[sheets][floors];   
   }
 
 

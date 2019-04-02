@@ -6,7 +6,14 @@ public class GlassFalling {
   // Do not change the parameters!
   public int glassFallingRecur(int floors, int sheets) {
     // Fill in here and change the return
-    return 0;
+    if(sheets==1) return floors;
+    if(floors==0) return 0;
+    if(floors==1) return 1;
+
+    int minimum=Integer.MAX_VALUE;
+    for(int x=1;x<=floors;x++) minimum=Math.min(minimum,(1+ Math.max(glassFallingRecur(sheets,floors-x), glassFallingRecur(sheets-1,x-1))));
+
+    return minimum;
   }
 
   // Optional:

@@ -1,14 +1,17 @@
 /**
- * Glass Falling
+ * RobCutting
  * Aurora Sharif
  */
 public class RodCutting {
 
       // Do not change the parameters!
       public int rodCuttingRecur(int rodLength, int[] lengthPrices) {
+        //base case
         if (rodLength <= 0) 
-                return 0; 
+                return 0;
+              //initailizing max with minimum value to be replaced later
             int max_val = Integer.MIN_VALUE; 
+            //iterate through the length recursively to get the maximum value/profit
             for (int i = 0; i<rodLength; i++) 
                 max_val = Math.max(max_val, 
                     lengthPrices[i] + rodCuttingRecur(rodLength-i-1, lengthPrices)); 
@@ -17,11 +20,15 @@ public class RodCutting {
 
       // Do not change the parameters!
       public int rodCuttingBottomUp(int rodLength, int[] lengthPrices) {
+           //initializes an array with one more cell for simplicities sake
            int val[] = new int[rodLength+1]; 
+          //the exta cell
           val[0] = 0; 
           for (int i = 1; i<=rodLength; i++) { 
+            //iterate through all the cell and give those cells a minimum value or 0.
             int max_val = Integer.MIN_VALUE; 
             for (int j = 0; j < i; j++) 
+              //replaces the min value with the calcualted value by the function call
               max_val = Math.max(max_val, 
                   lengthPrices[j] + val[i-j-1]); 
             val[i] = max_val; 

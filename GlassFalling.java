@@ -7,13 +7,14 @@ public class GlassFalling {
   // Do not change the parameters!
   public int glassFallingRecur(int floors, int sheets) {
     // Fill in here and change the return
+    //base cases
     if(sheets==1) return floors;
     if(floors==0) return 0;
     if(floors==1) return 1;
-
+    //setting the minimum for a max value initially so later on it can be replaced with aquired values.
     int minimum=Integer.MAX_VALUE;
     for(int x=1;x<=floors;x++) minimum=Math.min(minimum,(1+ Math.max(glassFallingRecur(sheets,floors-x), glassFallingRecur(sheets-1,x-1))));
-
+    	//evaluates the minimum of the maximum values yielded by the recursive functions.
     return minimum;
   }
 
@@ -27,9 +28,12 @@ public class GlassFalling {
   // Do not change the parameters!
   public int glassFallingBottomUp(int floors, int sheets) {
      // Fill in here and change the return
+
+  	//base cases
     if(floors == 0 || floors == 1 || sheets == 1) return floors;
     int[][] table = new int[sheets+1][floors+1];  
       for(int i = 1; i <= sheets; i++) {
+      	//initializing the first column and row cells with appropriate values.
           table[i][0] = 0;
           table[i][1] = 1;
       } for(int i = 1; i <= floors; i++) {
@@ -37,6 +41,7 @@ public class GlassFalling {
       } for(int i = 2; i <= sheets; i++) {
           for(int j = 2; j <= floors; j++){
               table[i][j] = Integer.MAX_VALUE;
+              //setting all other cells as max value to be replaced later with other feasible values
               for(int k = 1; k <= j; k++){
               int res = 1 + Math.max(table[i-1][k-1], table[i][j-k]); 
                    if (res < table[i][j]) {
@@ -44,7 +49,8 @@ public class GlassFalling {
                    }
               }
           }
-       } return table[sheets][floors];   
+       } //returns the result of the desired cell
+       return table[sheets][floors];   
   }
 
 

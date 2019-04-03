@@ -1,4 +1,7 @@
-
+/**
+ * Glass Falling
+ * Aurora Sharif
+ */
 public class RodCutting {
 
       // Do not change the parameters!
